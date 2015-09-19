@@ -5,10 +5,12 @@ var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var del = require('del')
 var concat = require('gulp-concat');
+var uncss = require('gulp-uncss');
 gulp.task('css', function () {
     gulp.src(['bower_components/bootstrap/dist/css/bootstrap.css','bower_components/bootstrap-material-design/dist/css/material.css'])
     	.pipe(concat('wild-notice.min.css'))
-        .pipe(cssmin())
+        .pipe(uncss({html:['index.html']}))
+	.pipe(cssmin())
         .pipe(gulp.dest('dist'));
 });
 gulp.task('compress', function() {
